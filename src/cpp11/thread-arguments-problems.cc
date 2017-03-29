@@ -40,7 +40,7 @@ int main() {
     auto threaded_tea = std::thread(
         std::bind(
             tea_selector,
-            my_cuppa,
+            std::ref(my_cuppa),// need to use reference here, or it will copy the object and we won't see the change
             "black"
         )
     );
