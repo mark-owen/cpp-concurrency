@@ -48,5 +48,7 @@ int main() {
 
     std::cout << "Updated tea type: " << my_cuppa.tea() << std::endl;
 
+    std::cout << "Hardware concurrency: " << std::thread::hardware_concurrency() << std::endl;
+    
     return 0;
 }

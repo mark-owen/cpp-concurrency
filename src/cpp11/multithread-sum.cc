@@ -2,10 +2,14 @@
 #include <iostream>
 #include <random>
 #include <vector>
+#include <mutex>
+#include <atomic>
 
 int total_entries;
 float sum;
-size_t occupancy;
+std::atomic<size_t> occupancy;
+std::mutex mtx;
+
 
 #define SIZE 100000000
 #define THREAD_POOL 50
@@ -38,7 +42,9 @@ size_t serial_occupancy(std::vector<float> &det) {
 void partial_occupancy(std::vector<float> &det, size_t begin, size_t end) {
   for (size_t i=begin; i<end; ++i) {
     if (det[i] > 0.0f) {
+      //mtx.lock();
       ++occupancy;
+      //mtx.unlock();
     }
   }
 }
